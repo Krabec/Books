@@ -8,13 +8,19 @@ body {
     margin: 0;
     padding: 0;
 }
+p, h2, h3 {
+    margin: 0;
+}
 a {
     color: #1C2A39;
     text-decoration: none;
 }
 ul {
-    list-style-type:none
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
 }
+
 .logo {
     font-size: 24px;
 }
@@ -24,7 +30,7 @@ ul {
     width: 100%;
     height: $headerHeight;
     background-color: $fonsColor;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
@@ -62,7 +68,6 @@ button {
 
 .slider {
     width: 100%;
-    height: 839px;
     display: flex;
     flex-direction: column;
     margin-top: $headerHeight;
@@ -71,6 +76,7 @@ button {
     padding: 0;
 }
 .slider_and_button {
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -86,6 +92,7 @@ button {
     margin-left: -63px;
     display: flex;
     flex-direction: column;
+    margin-right: -160px;
 }
 
 .old_book {
@@ -124,3 +131,74 @@ button {
     justify-content: space-between;
     margin-top: 17px;
 }
+.container {
+    width: 1120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slider .container {
+    flex-direction: column;
+}
+
+.categories {
+    width: 256px;
+    margin-left: -160px;
+    background-color: #EFEEF6;
+    padding-top: 45px;
+    padding-left: 160px;
+    padding-bottom: 58px;
+}
+
+.categories button {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: capitalize;
+    color: #5C6A79;
+}
+
+.books {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: $headerHeight;
+    background-color: $fonsColor;
+    align-items: center;
+    padding: 0;
+}
+
+.categories li {
+    margin-bottom: 23px;
+}
+
+//Пишам стиль для карт продукта
+
+.product_card {
+    display: flex;
+    height: 300px;
+    margin-left: -60px;
+    margin-top: 46px;
+}
+
+.image_book {
+    background-image: url('../images/book-cover-placeholder.jpg');
+    background-size: cover;
+    width: 212px;
+    height: 300px;
+}
+
+.books .container {
+    justify-content: left;
+    align-items: normal;
+}
+
+.description {
+    width: 176px;
+    padding-left: 36px;
+    padding-top: 49px;
+}
+
