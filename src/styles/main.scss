@@ -1,6 +1,10 @@
 // src/styles/main.css
+$headerHeight: 116px;
+$fonsColor: #FFFFFF;
+
 body {
     display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
 }
@@ -18,8 +22,8 @@ ul {
     display: flex;
     position: fixed;
     width: 100%;
-    height: 116px;
-    background-color: #FFFFFF;
+    height: $headerHeight;
+    background-color: $fonsColor;
     justify-content: space-around;
     align-items: center;
     font-weight: bold;
@@ -47,9 +51,76 @@ ul {
 .icons img {
     height: 17px;
 }
-.icons button {
+button {
     padding: 0;
     border: none;
     background-color: transparent;
     cursor: pointer;
-} 
+}
+
+// Стили для слайдера
+
+.slider {
+    width: 100%;
+    height: 839px;
+    display: flex;
+    flex-direction: column;
+    margin-top: $headerHeight;
+    background-color: $fonsColor;
+    align-items: center;
+    padding: 0;
+}
+.slider_and_button {
+    display: flex;
+    flex-direction: row;
+}
+
+.images {
+    background-image: url("../images/Slide_1.png");
+    background-size: cover;
+    width: 1120px;
+    height: 702px;
+}
+
+.slider_button {
+    margin-left: -63px;
+    display: flex;
+    flex-direction: column;
+}
+
+.old_book {
+    margin-top: 82px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 102px;
+    background-color: #9E98DC;
+    width: 109px;
+    height: 102px;
+}
+
+.new_book {
+    margin-top: 76px;
+    margin-left: 83px;
+    padding-left: 21px;
+    padding-right: 47px;
+    padding-top: 149px;
+    background-color: #FF8FE6;
+    width: 69px;
+    height: 124px;
+}
+
+.slider_button a {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    text-transform: uppercase;
+}
+
+.switch {
+    width: 56px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 17px;
+}
