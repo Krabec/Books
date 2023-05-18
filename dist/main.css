@@ -126,8 +126,12 @@ button {
 .slider .container {
   flex-direction: column; }
 
+aside {
+  display: flex; }
+
 .categories {
-  width: 256px;
+  width: 768px;
+  height: 608px;
   margin-left: -160px;
   background-color: #EFEEF6;
   padding-top: 45px;
@@ -158,8 +162,7 @@ button {
 .product_card {
   display: flex;
   height: 300px;
-  margin-left: -60px;
-  margin-top: 46px; }
+  margin-bottom: 91px; }
 
 .image_book {
   background-image: url(5f6bcb8f2bc2dc346143.jpg);
@@ -175,4 +178,29 @@ button {
   width: 176px;
   padding-left: 36px;
   padding-top: 49px; }
+
+.shelf_of_books {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: -60px;
+  margin-top: 46px; }
+
+.shelf_of_books button {
+  width: 176px;
+  height: 45px;
+  border: 1px solid #4C3DB2;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 10px;
+  /* identical to box height */
+  text-transform: uppercase;
+  color: #4C3DB2; }
+
+.shelf_of_books > button {
+  margin-left: 382px;
+  margin-bottom: 74px; }
 
