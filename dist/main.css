@@ -1,7 +1,17 @@
 /*!***************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/main.scss ***!
   \***************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
+/*!*******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/main.scss (1) ***!
+  \*******************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;900&display=swap);
+/*!*******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/main.scss (2) ***!
+  \*******************************************************************************************************************/
 body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -30,13 +40,17 @@ ul {
   background-color: #FFFFFF;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
+  font-weight: 700;
   font-family: 'Montserrat', sans-serif; }
 
 .menu {
   display: flex;
   width: 372px;
   text-transform: uppercase; }
+
+.menu .activ {
+  font-weight: 900;
+  color: #1C2A39; }
 
 .menu ul {
   width: 100%;
@@ -73,10 +87,18 @@ button {
   flex-direction: row; }
 
 .images {
-  background-image: url(ebf44883ab42ebab9bfd.png);
   background-size: cover;
   width: 1120px;
   height: 702px; }
+
+.slide_0 {
+  background-image: url(ebf44883ab42ebab9bfd.png); }
+
+.slide_1 {
+  background-image: url(aad3b703e7e6f8de2b59.png); }
+
+.slide_2 {
+  background-image: url(b62ead6875579370ce04.png); }
 
 .slider_button {
   margin-left: -63px;
@@ -147,6 +169,15 @@ aside {
   text-transform: capitalize;
   color: #5C6A79; }
 
+.categories .activ > button {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1C2A39; }
+
+.categories .activ {
+  list-style-image: url(6f79c0b567305795e173.svg); }
+
 .books {
   width: 100%;
   display: flex;
@@ -157,7 +188,7 @@ aside {
   padding: 0; }
 
 .categories li {
-  margin-bottom: 23px; }
+  margin-bottom: 16px; }
 
 .product_card {
   display: flex;

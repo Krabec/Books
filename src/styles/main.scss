@@ -1,8 +1,12 @@
-// src/styles/main.css
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;900&display=swap');
+
 $headerHeight: 116px;
 $fonsColor: #FFFFFF;
 
 body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -32,7 +36,7 @@ ul {
     background-color: $fonsColor;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
+    font-weight: 700;
     font-family: 'Montserrat', sans-serif;
 }
 .menu {
@@ -40,6 +44,10 @@ ul {
     width: 372px;
     text-transform: uppercase;
 } 
+.menu .activ{
+    font-weight: 900;
+    color: #1C2A39;
+}
 
 .menu ul {
     width: 100%;
@@ -82,11 +90,22 @@ button {
 }
 
 .images {
-    background-image: url("../images/Slide_1.png");
     background-size: cover;
     width: 1120px;
     height: 702px;
 }
+.slide_0 {
+    background-image: url("../images/Slide_1.png");
+}
+
+.slide_1 {
+    background-image: url("../images/Slide_2.png");
+}
+
+.slide_2 {
+    background-image: url("../images/Slide_3.png");
+}
+
 
 .slider_button {
     margin-left: -63px;
@@ -154,7 +173,7 @@ aside {
     padding-bottom: 58px;
 }
 
-.categories button {
+.categories button{
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
@@ -162,6 +181,17 @@ aside {
     line-height: 15px;
     text-transform: capitalize;
     color: #5C6A79;
+}
+
+.categories .activ>button{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #1C2A39;
+}
+
+.categories .activ {
+    list-style-image: url("../images/Ellipse.svg");
 }
 
 .books {
@@ -175,7 +205,7 @@ aside {
 }
 
 .categories li {
-    margin-bottom: 23px;
+    margin-bottom: 16px;
 }
 
 //Пишам стиль для карт продукта
