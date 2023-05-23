@@ -9,7 +9,7 @@ function addCards(elem) {
     console.log(elem)
     let xhr = new XMLHttpRequest();
     // Инициализируем запрос
-    xhr.open('GET', 'https://www.googleapis.com/books/v1/volumes?q="subject:Business"&key=AIzaSyCtUunme0MJS-BYEyA-SF_jSp6yeMNn2V4&printType=books&startIndex=0&maxResults=6&langRestrict=en');
+    xhr.open('GET', 'https://www.googleapis.com/books/v1/volumes?q="subject:Business"&key=<key>&printType=books&startIndex=0&maxResults=6&langRestrict=en');
 
     // Добавляем обрабочик ответа сервера
     xhr.onload = function() {
