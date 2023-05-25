@@ -1,58 +1,152 @@
 const genre = document.querySelectorAll('.genre');
 
+const categories = [
+    'Architecture',
+    'Art',
+    'Autobiography',
+    'Business',
+    'Crafts & Hobbies',
+    'Drama',
+    'Fiction',
+    'Cooking',
+    'Health & Fitness',
+    'History',
+    'Humor',
+    'Poetry',
+    'Psychology',
+    'Science',
+    'Technology',
+    'Travel'
+]
+
 function selectingAnElement(elem) {
     document.querySelector('.categories .activ').classList.remove('activ');
     elem.parentNode.classList.add('activ');
 }
 
-function addCards(elem) {
-    console.log(elem)
-    let xhr = new XMLHttpRequest();
-    // Инициализируем запрос
-    xhr.open('GET', 'https://www.googleapis.com/books/v1/volumes?q="subject:Business"&key=<key>&printType=books&startIndex=0&maxResults=6&langRestrict=en');
-
-    // Добавляем обрабочик ответа сервера
+function useRequest(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    
     xhr.onload = function() {
-    if (xhr.status != 200) { // HTTP ошибка?
-        // Если статус не 200 (указывает, что запрос выполнен успешно),
-        // то обрабатываем отдельно
+      if (xhr.status != 200) {
         console.log('Статус ответа: ', xhr.status);
-    } else {
-        // Ответ мы получаем в формате JSON, поэтому его надо распарсить
-        // console.log('Ответ сервера JSON', xhr.response);
-
-        // Парсим и выводим ответ сервера
-        let result = JSON.parse(xhr.response)
-        console.log(result);
-        console.log('Название', result.items[0].volumeInfo.title);
-        console.log('Автор', result.items[0].volumeInfo.authors);
-        //console.log('Средний рейтинг, если есть', result.items[0].volumeInfo.averageRating);
-        console.log('Описание', result.items[0].volumeInfo.description);
-        console.log('Возможность продажи', result.items[0].saleInfo.saleability);
-    }
+      } else {
+        const result = JSON.parse(xhr.response);
+        if (callback) {
+          callback(result);
+        }
+      }
     };
-
-    // Добавляем обрабочик процесса загрузки
-    xhr.onprogress = function(event) {
-    // Выведем прогресс загрузки
-    console.log(`Загружено ${event.loaded} из ${event.total}`)
-    };
-
-    // Добавляем обрабочик ошибки
+    
     xhr.onerror = function() {
-    // обработаем ошибку, не связанную с HTTP (например, нет соединения)
-    console.log('Ошибка! Статус ответа: ', xhr.status);
+      console.log('Ошибка! Статус ответа: ', xhr.status);
     };
-
-    // Отправляем запрос
+    
     xhr.send();
-}
+  };
 
+  // Ищем ноду для вставки результата запроса
+const resultNode = document.querySelector('.shelf_of_books');
+
+function displayResult(apiData) {
+    let cards = '';
+    let authors = '';
+    let thumbnail = '';
+    let retailPrice = '';
+    let averageRating = '';
+    let ratingsCount = '';
+
+    let result = apiData.items;
+    console.log(result);
+    // console.log('start cards', cards);
+    result.forEach(item => {
+        console.log(item);
+
+        //Форматирую авторов 
+        if (item.volumeInfo.authors) {
+            if(item.volumeInfo.authors.length > 1) {
+                authors = item.volumeInfo.authors.join(', ');
+            } else {
+                authors = item.volumeInfo.authors[0];
+            }
+        } else {
+            authors = 'Author unknown'
+        }
+            
+        //форматирую картинку
+        if(item.volumeInfo.imageLinks) {
+            thumbnail = `style="background-image: url(${item.volumeInfo.imageLinks.thumbnail})"`;
+        } else {
+            thumbnail = ''
+        }
+
+        //Форматирование рейтинка
+        if(item.volumeInfo.averageRating) {
+            averageRating = ``;
+            value = item.volumeInfo.averageRating;
+            value = Math.round(value);
+            console.log(value);
+            for(let i =0; i < value; i++) {
+                averageRating +=`<span class="active"></span>`
+            }
+            value = 5 - value;
+            console.log(value);
+            if(value > 0) {
+                for(let i = 0; i < value; i++) {
+                    averageRating +=`<span></span>`
+                }
+            }
+
+            ratingsCount = `${item.volumeInfo.ratingsCount} review`;
+        } else {
+            averageRating = ``;
+            ratingsCount = ``
+        }
+
+        //Форматирую стоимость
+        if(item.saleInfo.retailPrice) {
+            retailPrice = `<h3>${item.saleInfo.retailPrice.amount} ${item.saleInfo.retailPrice.currencyCode}</h3>`;
+        } else {
+            retailPrice = '' 
+        }
+
+      const cardBlock = `
+        <div class="product_card">
+            <div class="image_book" ${thumbnail}></div>
+            <div class="description">
+                <p>${authors}</p>
+                <h2>${item.volumeInfo.title}</h2>
+                <div class="rating-mini">
+                    ${averageRating}
+                </div>
+                ${ratingsCount}
+                <div class="container_descrip">
+                    <div class="descrip">
+                        ${item.volumeInfo.description}
+                    </div>
+                </div>
+                    ${retailPrice}
+                <button>buy now</button>
+            </div>
+        </div>
+      `;
+      cards = cards + cardBlock;
+    });
+
+    cards = cards + "<button>Load more</button>";
+    
+    // console.log('end cards', cards);
+      
+    resultNode.innerHTML = cards;
+  }
+
+useRequest('https://www.googleapis.com/books/v1/volumes?q="subject:Architecture"&key=<key>&printType=books&startIndex=0&maxResults=6&langRestrict=en', displayResult)
 
 
 for(let i = 0; i < genre.length; i++) {
     genre[i].addEventListener('click', () => {
         selectingAnElement(genre[i]);
-        addCards(genre[i].textContent);
+        useRequest(`https://www.googleapis.com/books/v1/volumes?q="subject:${categories[i]}"&key=<key>&printType=books&startIndex=0&maxResults=6&langRestrict=en`, displayResult)
     });
 };

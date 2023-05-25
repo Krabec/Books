@@ -9,6 +9,7 @@
 /*!*******************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/main.scss (2) ***!
   \*******************************************************************************************************************/
+@charset "UTF-8";
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
@@ -176,7 +177,7 @@ aside {
   color: #1C2A39; }
 
 .categories .activ {
-  list-style-image: url(6f79c0b567305795e173.svg); }
+  list-style-image: url(d0324fd136c6c11130d9.svg); }
 
 .books {
   width: 100%;
@@ -193,7 +194,8 @@ aside {
 .product_card {
   display: flex;
   height: 300px;
-  margin-bottom: 91px; }
+  margin-bottom: 91px;
+  font-size: 10px; }
 
 .image_book {
   background-image: url(5f6bcb8f2bc2dc346143.jpg);
@@ -234,4 +236,36 @@ aside {
 .shelf_of_books > button {
   margin-left: 382px;
   margin-bottom: 74px; }
+
+.container_descrip {
+  width: 180px;
+  height: 40px;
+  padding: 2px; }
+
+.descrip {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.3em;
+  height: 3.9em; }
+
+h2 {
+  font-size: 16px; }
+
+.rating-mini {
+  display: inline-block;
+  font-size: 0; }
+
+.rating-mini span {
+  padding: 0;
+  font-size: 20px;
+  line-height: 1;
+  color: lightgrey; }
+
+.rating-mini > span:before {
+  content: '★'; }
+
+.rating-mini > span.active {
+  color: gold; }
 

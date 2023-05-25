@@ -214,6 +214,7 @@ aside {
     display: flex;
     height: 300px;
     margin-bottom: 91px;
+    font-size: 10px;
 }
 
 .image_book {
@@ -263,3 +264,45 @@ aside {
     margin-left: 382px;
     margin-bottom: 74px;
 }
+
+.container_descrip {
+    width: 180px;
+    height: 40px;
+    padding: 2px;
+}
+
+.descrip {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.3em;
+    height: 3.9em;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+.rating-mini {
+	display: inline-block;
+	font-size: 0;
+}
+.rating-mini span {
+	padding: 0;
+	font-size: 20px;
+	line-height: 1;
+	color: lightgrey;
+}
+.rating-mini > span:before {
+	content: '★';
+}
+.rating-mini > span.active {
+	color: gold;
+}
+
+
+
+
+
+
