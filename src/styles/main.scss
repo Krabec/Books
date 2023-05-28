@@ -338,7 +338,21 @@ h2 {
     color: #5C6A79;
 }
 
+button:hover {
+    transform: scale(1.03);
+}
 
+button:active {
+    transform: scale(0.97);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: #596e85;
+}
 
 
 
