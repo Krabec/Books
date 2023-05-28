@@ -4,8 +4,15 @@ let buttonBuy = document.getElementsByClassName('buy');
 const buttonBasket = document.querySelector('.basket');
 const productQuantity = document.querySelector('.product_quantity');
 const elementCountBuy = document.querySelector('.count_buy');
-
+const keyAPI = "AIzaSyCtUunme0MJS-BYEyA-SF_jSp6yeMNn2V4";
+let resultItog = [];
+let idBuy = 0;
 let countBuy = 0;
+
+if(localStorage.idBuy) {
+    idBuy = Number(localStorage.idBuy);
+}
+
 if((Number(localStorage.countBuy) === 0) || !(localStorage.countBuy)) {
     productQuantity.classList.add("no_activ");
 } else {
@@ -62,6 +69,8 @@ function useRequest(url, callback) {
   // Ищем ноду для вставки результата запроса
 const resultNode = document.querySelector('.shelf_of_books');
 
+
+
 function displayResult(apiData) {
     let cards = '';
     let authors = '';
@@ -72,7 +81,8 @@ function displayResult(apiData) {
     let description = '';
 
     let result = apiData.items;
-    // console.log('start cards', cards);
+    resultItog = resultItog.concat(result);
+
     result.forEach(item => {
 
         //Форматирую авторов 
@@ -106,12 +116,10 @@ function displayResult(apiData) {
             averageRating = ``;
             value = item.volumeInfo.averageRating;
             value = Math.round(value);
-            console.log(value);
             for(let i =0; i < value; i++) {
                 averageRating +=`<span class="active"></span>`
             }
             value = 5 - value;
-            console.log(value);
             if(value > 0) {
                 for(let i = 0; i < value; i++) {
                     averageRating +=`<span></span>`
@@ -131,6 +139,17 @@ function displayResult(apiData) {
             retailPrice = '' 
         }
 
+        //Создание кнопки покупки
+        let buttonBuys = `<button class="buy" style="margin-top: 16px" value="${item.volumeInfo.title}">buy now</button>`
+
+        for(let key in localStorage) {
+            if (!localStorage.hasOwnProperty(key)) {
+              continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
+            }
+            if(localStorage.getItem(key).includes(`${item.volumeInfo.title}`)) {
+                buttonBuys = `<button class="buy in_the_cart" style="margin-top: 16px" value="${item.volumeInfo.title}">IN THE CART</button>`;
+            }
+        }
         let cardBlock
       
         if(averageRating !== '') {
@@ -152,7 +171,7 @@ function displayResult(apiData) {
                             </div>
                         </div>
                             ${retailPrice}
-                        <button class="buy" style="margin-top: 16px" value="${item.volumeInfo.title}, ${authors}, ${retailPrice}">buy now</button>
+                        ${buttonBuys}
                     </div>
                 </div>
             `;
@@ -170,7 +189,7 @@ function displayResult(apiData) {
                             </div>
                         </div>
                             ${retailPrice}
-                        <button class="buy" style="margin-top: 16px" value="${item.volumeInfo.title}, ${authors}, ${retailPrice}">buy now</button>
+                            ${buttonBuys}
                     </div>
                 </div>
             `;
@@ -180,29 +199,32 @@ function displayResult(apiData) {
 
     cards = cards;
     
-    // console.log('end cards', cards);
-    console.log("count" + count);
     if(count < 8) {
         resultNode.innerHTML = '';
     }
       
     resultNode.innerHTML += cards;
-    shoppingCounter()
+    shoppingCounter(resultItog)
   }
 
-function shoppingCounter(){
+function shoppingCounter(result){
+    buttonBuy = document.getElementsByClassName('buy');
     for(let k = 0; k < buttonBuy.length; k++) {
         buttonBuy[k].addEventListener('click', () => {
             if(!buttonBuy[k].classList.contains("in_the_cart")) {
                 countBuy += 1
+                idBuy += 1
                 info = buttonBuy[k].getAttribute('value');
+                localStorage.setItem('idBuy', idBuy);
                 localStorage.setItem('countBuy', countBuy);
-                localStorage.setItem(`Buy${countBuy}`, info);
+                localStorage.setItem(`Buy${idBuy}`, JSON.stringify(result[k]));
                 elementCountBuy.innerHTML = `${countBuy}`;
                 productQuantity.classList.remove("no_activ");
                 buttonBuy[k].innerHTML = "IN THE CART";
                 buttonBuy[k].classList.add("in_the_cart");
+
             } else {
+                info = buttonBuy[k].getAttribute('value');
                 if(countBuy >= 1) {
                     countBuy -= 1;
                 }
@@ -211,7 +233,15 @@ function shoppingCounter(){
                 if(countBuy < 1) {
                     productQuantity.classList.add("no_activ");
                 }
-                localStorage.removeItem(`Buy${countBuy}`);
+
+                for(let key in localStorage) {
+                    if (!localStorage.hasOwnProperty(key)) {
+                      continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
+                    }
+                    if(localStorage.getItem(key).includes(`${info}`)) {
+                        localStorage.removeItem(key);
+                    }
+                }
                 buttonBuy[k].innerHTML = "buy now";
                 buttonBuy[k].classList.remove("in_the_cart");
             }
@@ -219,23 +249,24 @@ function shoppingCounter(){
     };
 }
 
-useRequest('https://www.googleapis.com/books/v1/volumes?q="subject:Architecture"&key=AIzaSyCtUunme0MJS-BYEyA-SF_jSp6yeMNn2V4&printType=books&startIndex=0&maxResults=6&langRestrict=en', displayResult)
+useRequest(`https://www.googleapis.com/books/v1/volumes?q="subject:Architecture"&key=${keyAPI}&printType=books&startIndex=0&maxResults=6&langRestrict=en`, displayResult)
 
 let count = 6;
 let categor = 'Architecture';
 
 for(let i = 0; i < genre.length; i++) {
     genre[i].addEventListener('click', () => {
+        resultItog = [];
         count = 6;
         selectingAnElement(genre[i]);
         categor = categories[i];
-        useRequest(`https://www.googleapis.com/books/v1/volumes?q="subject:${categor}"&key=AIzaSyCtUunme0MJS-BYEyA-SF_jSp6yeMNn2V4&printType=books&startIndex=0&maxResults=6&langRestrict=en`, displayResult)
+        useRequest(`https://www.googleapis.com/books/v1/volumes?q="subject:${categor}"&key=${keyAPI}&printType=books&startIndex=0&maxResults=6&langRestrict=en`, displayResult)
     });
 };
 
-console.log(load)
+
 load.addEventListener('click', () =>{
-    useRequest(`https://www.googleapis.com/books/v1/volumes?q="subject:${categor}"&key=AIzaSyCtUunme0MJS-BYEyA-SF_jSp6yeMNn2V4&printType=books&startIndex=${count}&maxResults=6&langRestrict=en`, displayResult);
+    useRequest(`https://www.googleapis.com/books/v1/volumes?q="subject:${categor}"&key=${keyAPI}&printType=books&startIndex=${count}&maxResults=6&langRestrict=en`, displayResult);
     count += 6
 });
 
@@ -244,11 +275,10 @@ buttonBasket.addEventListener('click', () =>{
         if (!localStorage.hasOwnProperty(key)) {
           continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
         }
-        console.log(`${key}: ${localStorage.getItem(key)}`);
+        console.log(key + ": " + localStorage.getItem(key))
     }
     countBuy = 0;
     localStorage.clear();
-    console.log(localStorage.getItem('countBuy'));
     productQuantity.classList.add("no_activ");
 });
 
