@@ -230,21 +230,31 @@ aside {
 }
 
 .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 176px;
     padding-left: 36px;
-    padding-top: 49px;
+    padding-bottom: 36px;
 }
 
 .shelf_of_books {
+    width: 924px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-left: -60px;
-    margin-top: 46px;
 }
 
-.shelf_of_books button {
+.div_shelf_of_books {
+    margin-left: -60px;
+    margin-top: 46px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.div_shelf_of_books button {
     width: 176px;
     height: 45px;
     border: 1px solid #4C3DB2;
@@ -260,6 +270,11 @@ aside {
     color: #4C3DB2;
 }
 
+.div_shelf_of_books>button {
+    margin-left: 358px;
+    margin-bottom: 74px;
+}
+
 .shelf_of_books>button {
     margin-left: 382px;
     margin-bottom: 74px;
@@ -269,6 +284,8 @@ aside {
     width: 180px;
     height: 40px;
     padding: 2px;
+    margin-top: 17px;
+    margin-bottom: 10px;
 }
 
 .descrip {
@@ -282,12 +299,14 @@ aside {
 
 h2 {
     font-size: 16px;
+    margin-top: 4px;
 }
 
 .rating-mini {
 	display: inline-block;
 	font-size: 0;
 }
+
 .rating-mini span {
 	padding: 0;
 	font-size: 20px;
@@ -299,6 +318,15 @@ h2 {
 }
 .rating-mini > span.active {
 	color: gold;
+}
+
+.basket {
+    display: flex; 
+}
+
+.product_quantity {
+    margin-left: -9px;
+    margin-top: 8px;
 }
 
 

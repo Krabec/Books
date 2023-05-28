@@ -23,7 +23,15 @@
         <div class="icons">
           <button><img src="../src/images/user.svg" alt="user"></button>
           <button><img src="../src/images/search.svg" alt="user"></button>
-          <button><img src="../src/images/shop_bag.svg" alt="user"></button>
+          <button class="basket">
+            <img src="../src/images/shop_bag.svg" alt="user">
+            <div class="product_quantity">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6.5" cy="6.5" r="6.5" fill="#FF353A"/>
+                <text x="3" y="11" fill="white">6</text>
+              </svg>
+            </div>              
+          </button>
         </div>
       </div>
     </header>
@@ -94,8 +102,11 @@
               <li><button class="genre">Travel & Maps</button></li>
             </ul>
           </aside>
-          <div class="shelf_of_books">
+          <div class="div_shelf_of_books">
+            <div class="shelf_of_books"></div>
+            <button class="load_more">Load more</button>
           </div>
+          
         </div>
       </section>
     </main>

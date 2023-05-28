@@ -1,4 +1,16 @@
+const { buildError } = require("css-minimizer-webpack-plugin");
+
 const genre = document.querySelectorAll('.genre');
+const load = document.querySelector('.load_more');
+let buttonBuy = document.getElementsByClassName('buy');
+const buttonBasket = document.querySelector('.bascet');
+let countBuy = 0;
+if(localStorage.countBuy) {
+    countBuy = Number(localStorage.countBuy);
+}
+
+
+
 
 const categories = [
     'Architecture',
@@ -56,12 +68,11 @@ function displayResult(apiData) {
     let retailPrice = '';
     let averageRating = '';
     let ratingsCount = '';
+    let description = '';
 
     let result = apiData.items;
-    console.log(result);
     // console.log('start cards', cards);
     result.forEach(item => {
-        console.log(item);
 
         //Форматирую авторов 
         if (item.volumeInfo.authors) {
@@ -81,7 +92,15 @@ function displayResult(apiData) {
             thumbnail = ''
         }
 
-        //Форматирование рейтинка
+        //Форматирую описание
+        if(item.volumeInfo.description) {
+            description = item.volumeInfo.description;
+        } else {
+            description = 'No description';
+        }
+
+
+        //Форматирование рейтинга
         if(item.volumeInfo.averageRating) {
             averageRating = ``;
             value = item.volumeInfo.averageRating;
@@ -111,42 +130,95 @@ function displayResult(apiData) {
             retailPrice = '' 
         }
 
-      const cardBlock = `
-        <div class="product_card">
-            <div class="image_book" ${thumbnail}></div>
-            <div class="description">
-                <p>${authors}</p>
-                <h2>${item.volumeInfo.title}</h2>
-                <div class="rating-mini">
-                    ${averageRating}
-                </div>
-                ${ratingsCount}
-                <div class="container_descrip">
-                    <div class="descrip">
-                        ${item.volumeInfo.description}
+        let cardBlock
+      
+        if(averageRating !== '') {
+            cardBlock = `
+                <div class="product_card">
+                    <div class="image_book" ${thumbnail}></div>
+                    <div class="description">
+                        <p>${authors}</p>
+                        <h2>${item.volumeInfo.title}</h2>
+                        <div>
+                            <div class="rating-mini">
+                                ${averageRating}
+                            </div>
+                            ${ratingsCount}
+                        </div>
+                        <div class="container_descrip">
+                            <div class="descrip">
+                                ${description}
+                            </div>
+                        </div>
+                            ${retailPrice}
+                        <button class="buy" style="margin-top: 16px" value="${item.volumeInfo.title}, ${authors}, ${retailPrice}">buy now</button>
                     </div>
                 </div>
-                    ${retailPrice}
-                <button>buy now</button>
-            </div>
-        </div>
-      `;
+            `;
+        } else {
+            cardBlock = `
+                <div class="product_card">
+                    <div class="image_book" ${thumbnail}></div>
+                    <div class="description">
+                        <p>${authors}</p>
+                        <h2>${item.volumeInfo.title}</h2>
+                        ${ratingsCount}
+                        <div class="container_descrip">
+                            <div class="descrip">
+                                ${description}
+                            </div>
+                        </div>
+                            ${retailPrice}
+                        <button class="buy" style="margin-top: 16px" value="${item.volumeInfo.title}, ${authors}, ${retailPrice}">buy now</button>
+                    </div>
+                </div>
+            `;
+        }
       cards = cards + cardBlock;
     });
 
-    cards = cards + "<button>Load more</button>";
+    cards = cards;
     
     // console.log('end cards', cards);
+    console.log("count" + count);
+    if(count < 8) {
+        resultNode.innerHTML = '';
+    }
       
-    resultNode.innerHTML = cards;
+    resultNode.innerHTML += cards;
+    for(let k = 0; k < genre.length; k++) {
+        buttonBuy[k].addEventListener('click', () => {
+            countBuy += 1
+            info = buttonBuy[k].getAttribute('value');
+            localStorage.setItem('countBuy', countBuy);
+            localStorage.setItem(`Buy${countBuy}`, info);
+            console.log(localStorage.getItem('countBuy'));
+        });
+    };
   }
 
-useRequest('https://www.googleapis.com/books/v1/volumes?q="subject:Architecture"&key=<key>&printType=books&startIndex=0&maxResults=6&langRestrict=en', displayResult)
+useRequest('https://www.googleapis.com/books/v1/volumes?q="subject:Architecture"&key=AIzaSyCtUunme0MJS-BYEyA-SF_jSp6yeMNn2V4&printType=books&startIndex=0&maxResults=6&langRestrict=en', displayResult)
 
+let count = 6;
+let categor = 'Architecture';
 
 for(let i = 0; i < genre.length; i++) {
     genre[i].addEventListener('click', () => {
+        count = 6;
         selectingAnElement(genre[i]);
-        useRequest(`https://www.googleapis.com/books/v1/volumes?q="subject:${categories[i]}"&key=<key>&printType=books&startIndex=0&maxResults=6&langRestrict=en`, displayResult)
+        categor = categories[i];
+        useRequest(`https://www.googleapis.com/books/v1/volumes?q="subject:${categor}"&key=AIzaSyCtUunme0MJS-BYEyA-SF_jSp6yeMNn2V4&printType=books&startIndex=0&maxResults=6&langRestrict=en`, displayResult)
     });
 };
+
+console.log(load)
+load.addEventListener('click', () =>{
+    useRequest(`https://www.googleapis.com/books/v1/volumes?q="subject:${categor}"&key=AIzaSyCtUunme0MJS-BYEyA-SF_jSp6yeMNn2V4&printType=books&startIndex=${count}&maxResults=6&langRestrict=en`, displayResult);
+    count += 6
+});
+
+buttonBasket.addEventListener('click', () =>{
+    countBuy = 0
+    localStorage.setItem('countBuy', countBuy);
+});
+
