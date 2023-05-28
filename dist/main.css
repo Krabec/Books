@@ -292,3 +292,10 @@ h2 {
   margin-left: -9px;
   margin-top: 8px; }
 
+.no_activ {
+  display: none; }
+
+.div_shelf_of_books .in_the_cart {
+  border: 1px solid #EEEDF5;
+  color: #5C6A79; }
+

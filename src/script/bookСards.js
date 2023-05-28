@@ -1,16 +1,17 @@
-const { buildError } = require("css-minimizer-webpack-plugin");
-
 const genre = document.querySelectorAll('.genre');
 const load = document.querySelector('.load_more');
 let buttonBuy = document.getElementsByClassName('buy');
-const buttonBasket = document.querySelector('.bascet');
+const buttonBasket = document.querySelector('.basket');
+const productQuantity = document.querySelector('.product_quantity');
+const elementCountBuy = document.querySelector('.count_buy');
+
 let countBuy = 0;
-if(localStorage.countBuy) {
+if((Number(localStorage.countBuy) === 0) || !(localStorage.countBuy)) {
+    productQuantity.classList.add("no_activ");
+} else {
     countBuy = Number(localStorage.countBuy);
+    elementCountBuy.innerHTML = `${countBuy}`;
 }
-
-
-
 
 const categories = [
     'Architecture',
@@ -186,16 +187,37 @@ function displayResult(apiData) {
     }
       
     resultNode.innerHTML += cards;
-    for(let k = 0; k < genre.length; k++) {
+    shoppingCounter()
+  }
+
+function shoppingCounter(){
+    for(let k = 0; k < buttonBuy.length; k++) {
         buttonBuy[k].addEventListener('click', () => {
-            countBuy += 1
-            info = buttonBuy[k].getAttribute('value');
-            localStorage.setItem('countBuy', countBuy);
-            localStorage.setItem(`Buy${countBuy}`, info);
-            console.log(localStorage.getItem('countBuy'));
+            if(!buttonBuy[k].classList.contains("in_the_cart")) {
+                countBuy += 1
+                info = buttonBuy[k].getAttribute('value');
+                localStorage.setItem('countBuy', countBuy);
+                localStorage.setItem(`Buy${countBuy}`, info);
+                elementCountBuy.innerHTML = `${countBuy}`;
+                productQuantity.classList.remove("no_activ");
+                buttonBuy[k].innerHTML = "IN THE CART";
+                buttonBuy[k].classList.add("in_the_cart");
+            } else {
+                if(countBuy >= 1) {
+                    countBuy -= 1;
+                }
+                localStorage.setItem('countBuy', countBuy);
+                elementCountBuy.innerHTML = `${countBuy}`;
+                if(countBuy < 1) {
+                    productQuantity.classList.add("no_activ");
+                }
+                localStorage.removeItem(`Buy${countBuy}`);
+                buttonBuy[k].innerHTML = "buy now";
+                buttonBuy[k].classList.remove("in_the_cart");
+            }
         });
     };
-  }
+}
 
 useRequest('https://www.googleapis.com/books/v1/volumes?q="subject:Architecture"&key=AIzaSyCtUunme0MJS-BYEyA-SF_jSp6yeMNn2V4&printType=books&startIndex=0&maxResults=6&langRestrict=en', displayResult)
 
@@ -218,7 +240,15 @@ load.addEventListener('click', () =>{
 });
 
 buttonBasket.addEventListener('click', () =>{
-    countBuy = 0
-    localStorage.setItem('countBuy', countBuy);
+    for(let key in localStorage) {
+        if (!localStorage.hasOwnProperty(key)) {
+          continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
+        }
+        console.log(`${key}: ${localStorage.getItem(key)}`);
+    }
+    countBuy = 0;
+    localStorage.clear();
+    console.log(localStorage.getItem('countBuy'));
+    productQuantity.classList.add("no_activ");
 });
 
