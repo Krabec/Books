@@ -5,16 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "author": "Krabec",
   "license": "ISC",
   "repository": "https://github.com/Krabec/Books",
   "devDependencies": {
     "css-minimizer-webpack-plugin": "^5.0.0",
+    "gh-pages": "^6.1.0",
     "webpack": "^5.82.1",
     "webpack-cli": "^5.1.1"
   },
+  "homepage": "https://krabec.github.io/Books/",
   "dependencies": {
     "@babel/core": "^7.21.8",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
