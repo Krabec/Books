@@ -1,0 +1,313 @@
+/*!***************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/main.scss ***!
+  \***************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
+/*!*******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/main.scss (1) ***!
+  \*******************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;900&display=swap);
+/*!*******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/main.scss (2) ***!
+  \*******************************************************************************************************************/
+@charset "UTF-8";
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0; }
+
+p, h2, h3 {
+  margin: 0; }
+
+a {
+  color: #1C2A39;
+  text-decoration: none; }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+
+.logo {
+  font-size: 24px; }
+
+.header {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 116px;
+  background-color: #FFFFFF;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif; }
+
+.menu {
+  display: flex;
+  width: 372px;
+  text-transform: uppercase; }
+
+.menu .activ {
+  font-weight: 900;
+  color: #1C2A39; }
+
+.menu ul {
+  width: 100%;
+  display: flex;
+  font-size: 10px;
+  justify-content: space-between; }
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  width: 120px; }
+
+.icons img {
+  height: 17px; }
+
+button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer; }
+
+.slider {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 116px;
+  background-color: #FFFFFF;
+  align-items: center;
+  padding: 0; }
+
+.slider_and_button {
+  width: 100%;
+  display: flex;
+  flex-direction: row; }
+
+.images {
+  background-size: cover;
+  width: 1120px;
+  height: 702px; }
+
+.slide_0 {
+  background-image: url(ebf44883ab42ebab9bfd.png); }
+
+.slide_1 {
+  background-image: url(aad3b703e7e6f8de2b59.png); }
+
+.slide_2 {
+  background-image: url(b62ead6875579370ce04.png); }
+
+.slider_button {
+  margin-left: -63px;
+  display: flex;
+  flex-direction: column;
+  margin-right: -160px; }
+
+.old_book {
+  margin-top: 82px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 102px;
+  background-color: #9E98DC;
+  width: 109px;
+  height: 102px; }
+
+.new_book {
+  margin-top: 76px;
+  margin-left: 83px;
+  padding-left: 21px;
+  padding-right: 47px;
+  padding-top: 149px;
+  background-color: #FF8FE6;
+  width: 69px;
+  height: 124px; }
+
+.slider_button a {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase; }
+
+.switch {
+  width: 56px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 17px; }
+
+.container {
+  width: 1120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.slider .container {
+  flex-direction: column; }
+
+aside {
+  display: flex; }
+
+.categories {
+  width: 768px;
+  height: 608px;
+  margin-left: -160px;
+  background-color: #EFEEF6;
+  padding-top: 45px;
+  padding-left: 160px;
+  padding-bottom: 58px; }
+
+.categories button {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: capitalize;
+  color: #5C6A79; }
+
+.categories .activ > button {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1C2A39; }
+
+.categories .activ {
+  list-style-image: url(d0324fd136c6c11130d9.svg); }
+
+.books {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 116px;
+  background-color: #FFFFFF;
+  align-items: center;
+  padding: 0; }
+
+.categories li {
+  margin-bottom: 16px; }
+
+.product_card {
+  display: flex;
+  height: 300px;
+  margin-bottom: 91px;
+  font-size: 10px; }
+
+.image_book {
+  background-image: url(5f6bcb8f2bc2dc346143.jpg);
+  background-size: cover;
+  width: 212px;
+  height: 300px; }
+
+.books .container {
+  justify-content: left;
+  align-items: normal; }
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 176px;
+  padding-left: 36px;
+  padding-bottom: 36px; }
+
+.shelf_of_books {
+  width: 924px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+
+.div_shelf_of_books {
+  margin-left: -60px;
+  margin-top: 46px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
+.div_shelf_of_books button {
+  width: 176px;
+  height: 45px;
+  border: 1px solid #4C3DB2;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 10px;
+  /* identical to box height */
+  text-transform: uppercase;
+  color: #4C3DB2; }
+
+.div_shelf_of_books > button {
+  margin-left: 358px;
+  margin-bottom: 74px; }
+
+.shelf_of_books > button {
+  margin-left: 382px;
+  margin-bottom: 74px; }
+
+.container_descrip {
+  width: 180px;
+  height: 40px;
+  padding: 2px;
+  margin-top: 17px;
+  margin-bottom: 10px; }
+
+.descrip {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.3em;
+  height: 3.9em; }
+
+h2 {
+  font-size: 16px;
+  margin-top: 4px; }
+
+.rating-mini {
+  display: inline-block;
+  font-size: 0; }
+
+.rating-mini span {
+  padding: 0;
+  font-size: 20px;
+  line-height: 1;
+  color: lightgrey; }
+
+.rating-mini > span:before {
+  content: '★'; }
+
+.rating-mini > span.active {
+  color: gold; }
+
+.basket {
+  display: flex; }
+
+.product_quantity {
+  margin-left: -9px;
+  margin-top: 8px; }
+
+.no_activ {
+  display: none; }
+
+.div_shelf_of_books .in_the_cart {
+  border: 1px solid #EEEDF5;
+  color: #5C6A79; }
+
+button:hover {
+  transform: scale(1.03); }
+
+button:active {
+  transform: scale(0.97); }
+
+a:hover {
+  text-decoration: underline; }
+
+a:active {
+  color: #596e85; }
+
